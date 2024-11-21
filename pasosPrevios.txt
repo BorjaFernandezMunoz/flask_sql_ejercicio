@@ -1,0 +1,7 @@
+PASOS PREVIOS:
+
+Crear entorno virtual: python -m venv env
+Activarlo: env\Scripts\activate
+Instalar los requerimientos: pip install autopep8 Flask python-dotenv
+Guardar los requerimientos en el archivo requirements.txt pip freeze > requirements.txt
+Separar los requerimientos del programador y los requerimientos del usuario creando dos archivos "requirements"
