@@ -10,13 +10,9 @@
 </head>
 
 <body>
-  <header>Balance de movimientos</header>
 
-  <nav class="navbar">
-    <a href="/">Inicio</a>
-    |
-    <a href="/nuevo">Nuevo</a>
-  </nav>
+  {% include 'components/header.html' %}
+  {% include 'components/navbar.html' %}
 
   <main class="main">
 
@@ -29,7 +25,9 @@
 
   </main>
 
-  <footer class="footer">KeepCoding Bootcamp Cero XXII. Octubre-Noviembre 2024.</footer>
+  {% include 'components/footer.html' %}
+
+
 </body>
 
 </html>
