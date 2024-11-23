@@ -1,7 +1,13 @@
 from flask import render_template
 
-from . import app
+from balance.models import ListaMovimientosDB, ListaMovimientosCSV
+
+from . import app, ALMACEN
 
 @app.route('/')
 def home():
-         return render_template('inicio.html')
+    if ALMACEN == 0:
+        lista = ListaMovimientosCSV()
+    else:
+        lista = ListaMovimientosDB()
+    return render_template('inicio.html', movs = lista.movimientos)
