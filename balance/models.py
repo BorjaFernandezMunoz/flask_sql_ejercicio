@@ -34,17 +34,27 @@ class DBManager:
     # 4.1. Obtener los datos.
     datos = cursor.fetchall()
 
+    self.registros = []
+    nombres_columna =[]
+
+    for columna in cursor.description:
+      nombres_columna.append(columna[0])
     # 4.2. Guardar los datos localmente.
-    # for dato in datos:
-    #  movimiento = {}
-        
+    for dato in datos:
+      movimiento = {}
+      indice = 0
+      for nombre in nombres_columna:
+        movimiento[nombre] = dato[indice]
+        indice += 1
+      self.registros.append(movimiento)
+
     print(datos)
 
     # 5. Cerrar la conexión.
     conexion.close()
 
     # 6. Devolver el resultado.
-    return datos
+    return self.registros
 
 
 class Movimiento:
@@ -72,9 +82,22 @@ class Movimiento:
       mensaje = f'Error desconocido con la fecha'
       self.errores.append(mensaje)
 
+    try:
+      valor = float(cantidad)
+      if valor > 0:
+        self.cantidad = valor
+      else:
+        self.cantidad = 0
+        mensaje = f'El importe de la cantidad debe de ser mayor que cero'
+        self.errores.append(mensaje)
+
+    except ValueError:
+      self.cantidad = 0
+      mensaje = f'El valor no es convertible a cero'
+      self.errores.append(mensaje)
+
     self.concepto = concepto
     self.tipo = tipo
-    self.cantidad = cantidad
 
   @property
   def has_errors(self):
@@ -117,15 +140,11 @@ class ListaMovimientosDB(ListaMovimientos):
     db = DBManager(RUTA_DB)
     sql = 'SELECT id, fecha, concepto, tipo, cantidad from movimientos'
     datos = db.consultarSQL(sql)
+  
     self.movimientos = []
+
     for dato in datos:
-      mov_dict ={
-        'fecha': dato[1],
-        'concepto': dato[2],
-        'tipo': dato[3],
-        'cantidad': dato[4]
-      }
-      mov = Movimiento(mov_dict)
+      mov = Movimiento(dato)
       self.movimientos.append(mov)
 
 
