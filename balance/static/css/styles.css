@@ -48,7 +48,8 @@ header {
   margin: 0;
 }
 
-.tabla .numero {
+.tabla .numero, 
+.tabla .acciones {
   text-align: right;
 }
 
@@ -68,4 +69,17 @@ header {
 .footer {
   padding: 20px;
   border-top: var(--standard-border);
+}
+
+.acciones .mini-boton {
+  border: solid thin var(--primary-color);
+  padding: 0 5px;
+  background-color: lightgray;
+  color: var(--primary-color);
+}
+
+.acciones .mini-boton:hover {
+  text-decoration: none;
+  color: white;
+  background-color: var(--primary-color)
 }
