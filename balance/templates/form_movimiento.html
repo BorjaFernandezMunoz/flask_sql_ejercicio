@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block page_title%}
+<h1>Modificar movimiento</h1>
+{% endblock page_title %}
+
+{% block contenido %}
+
+
+<!--
+  CRUD: Create, Read, Update, Delete
+
+  GET: Leer (Read)
+  POST: Crear (Create)
+  PUT: Actualizar (Update)
+  DELETE: Borrar (Delete)
+-->
+
+<form action="/editar" method="post">
+  {{form.csrf_token}}
+  <!-- Fecha -->
+  <div class="campo-formulario">
+    {{ form.fecha.label }}
+    {{ form.fecha }}
+  </div>
+
+  <!-- Concepto -->
+  <div class="campo-formulario">
+    {{ form.concepto.label }}
+    {{ form.concepto }}
+  </div>
+
+  <!-- Tipo -->
+  <div class="campo-formulario">
+    {% for campo in form.tipo %}
+    {{ campo }}
+    {{ campo.label }}
+    {% endfor %}
+  </div>
+
+  <!-- Cantidad -->
+  <div class="campo-formulario">
+    {{ form.cantidad.label }}
+    {{ form.cantidad }}
+  </div>
+
+  <!-- Botón de enviar -->
+  <div class="acciones">
+    {{ form.submit }}
+  </div>
+</form>
+
+{% endblock contenido %}
