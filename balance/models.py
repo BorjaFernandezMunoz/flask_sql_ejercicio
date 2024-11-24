@@ -56,6 +56,22 @@ class DBManager:
     # 6. Devolver el resultado.
     return self.registros
 
+  def borrar(self, id):
+
+    sql = 'DELETE FROM movimientos WHERE id =?'
+    conexion = sqlite3.connect(self.ruta)
+    cursor = conexion.cursor()
+
+    resultado = False
+    try:
+      cursor.execute(sql,(id,))
+      conexion.commit()
+      resultado = True
+    except:
+      conexion.rollback()
+
+    conexion.close()
+    return resultado
 
 class Movimiento:
 
@@ -151,7 +167,14 @@ class ListaMovimientosDB(ListaMovimientos):
       self.movimientos.append(mov)
 
   def eliminar(self, id):
-    return True
+    db = DBManager(RUTA_DB)
+    resultado = False
+    try:
+      resultado = db.borrar(id)
+    except:
+      print(f'El DB Manager ha fallado al borrar')
+    
+    return resultado
   
 class ListaMovimientosCSV(ListaMovimientos):
 
