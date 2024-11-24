@@ -126,6 +126,9 @@ class ListaMovimientos:
   def cargar_movimientos(self):
     raise NotImplementedError('Debes usar una clase concreta de movimientos')
 
+  def eliminar(self, id):
+    raise NotImplementedError('Debes usar una clase concreta de movimientos')
+
   def __str__(self):
     result = ''
     for mov in self.movimientos:
@@ -147,7 +150,9 @@ class ListaMovimientosDB(ListaMovimientos):
       mov = Movimiento(dato)
       self.movimientos.append(mov)
 
-
+  def eliminar(self, id):
+    return True
+  
 class ListaMovimientosCSV(ListaMovimientos):
 
   def __init__(self):
