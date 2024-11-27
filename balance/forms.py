@@ -4,8 +4,7 @@ from wtforms import (HiddenField,
                      DecimalField,
                      RadioField,
                      StringField, 
-                     SubmitField
-)
+                     SubmitField)
 
 
 class MovimientoForm(FlaskForm):
